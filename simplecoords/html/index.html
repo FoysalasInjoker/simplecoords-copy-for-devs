@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clipboard Copy</title>
+</head>
+<body>
+    <script>
+        window.addEventListener('message', function(event) {
+            const data = event.data;
+            if (data.action === 'copyToClipboard') {
+                copyToClipboard(data.text);
+            }
+        });
+
+        function copyToClipboard(text) {
+            const el = document.createElement('textarea');
+            el.value = text;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            console.log('Copied:', text);
+        }
+    </script>
+</body>
+</html>
